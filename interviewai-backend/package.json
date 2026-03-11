@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "backfill:practice-content": "node backfill-practice-content.js"
+  },
+  "dependencies": {
+    "mongodb": "^7.1.0"
+  }
+}

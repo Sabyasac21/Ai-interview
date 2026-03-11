@@ -1,0 +1,172 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: interviewai_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: interviewai
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql-init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - interviewai-network
+
+  mongodb:
+    image: mongo:7.0
+    container_name: interviewai_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: interviewai
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/init.js
+    networks:
+      - interviewai-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: interviewai_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - interviewai-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: interviewai_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - USER_SERVICE_URL=http://interviewai_user:8001
+      - PRACTICE_SERVICE_URL=http://interviewai_practice:8002
+      - HISTORY_SERVICE_URL=http://interviewai_history:8003
+      - INTERVIEW_SERVICE_URL=http://interviewai_interview:8004
+      - PROFILE_SERVICE_URL=http://interviewai_profile:8005
+      - JWT_SECRET=your-super-secret-key-change-in-production
+    depends_on:
+      - user-service
+      - practice-service
+      - history-service
+      - interview-service
+      - profile-service
+    networks:
+      - interviewai-network
+
+  user-service:
+    build: ./services/user-service
+    container_name: interviewai_user
+    ports:
+      - "8001:8001"
+    environment:
+      - MYSQL_URL=mysql+aiomysql://root:rootpassword@interviewai_mysql:3306/interviewai
+      - REDIS_URL=redis://interviewai_redis:6379
+      - JWT_SECRET=your-super-secret-key-change-in-production
+    volumes:
+      - ./services/user-service/uploads:/app/services/user-service/uploads
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - interviewai-network
+
+  practice-service:
+    build: ./services/practice-service
+    container_name: interviewai_practice
+    ports:
+      - "8002:8002"
+    restart: always
+    environment:
+      - MYSQL_URL=mysql+aiomysql://root:rootpassword@interviewai_mysql:3306/interviewai
+      - MONGO_URL=mongodb://root:rootpassword@interviewai_mongo:27017/interviewai?authSource=admin
+      - REDIS_URL=redis://interviewai_redis:6379/0
+      - JWT_SECRET=your-super-secret-key-change-in-production
+      - USER_SERVICE_URL=http://interviewai_user:8001
+    depends_on:
+      - mysql
+      - mongodb
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - interviewai-network
+
+  judge-service:
+    build: ./services/judge-service
+    container_name: interviewai_judge
+    environment:
+      - REDIS_URL=redis://interviewai_redis:6379/0
+    depends_on:
+      - redis
+    restart: always
+    healthcheck:
+      test: ["CMD", "bash", "-c", "pgrep -f judge || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - interviewai-network
+
+  history-service:
+    build: ./services/history-service
+    container_name: interviewai_history
+    ports:
+      - "8003:8003"
+    environment:
+      - MONGO_URL=mongodb://root:rootpassword@interviewai_mongo:27017/interviewai?authSource=admin
+      - JWT_SECRET=your-super-secret-key-change-in-production
+    depends_on:
+      - mongodb
+    networks:
+      - interviewai-network
+
+  interview-service:
+    build: ./services/interview-service
+    container_name: interviewai_interview
+    ports:
+      - "8004:8004"
+    environment:
+      - MYSQL_URL=mysql+aiomysql://root:rootpassword@interviewai_mysql:3306/interviewai
+      - MONGO_URL=mongodb://root:rootpassword@interviewai_mongo:27017/interviewai?authSource=admin
+      - REDIS_URL=redis://interviewai_redis:6379/0
+      - JWT_SECRET=your-super-secret-key-change-in-production
+    depends_on:
+      - mysql
+      - mongodb
+      - redis
+    networks:
+      - interviewai-network
+
+  profile-service:
+    build: ./services/profile-service
+    container_name: interviewai_profile
+    ports:
+      - "8005:8005"
+    environment:
+      - MYSQL_URL=mysql+aiomysql://root:rootpassword@interviewai_mysql:3306/interviewai
+      - MONGO_URL=mongodb://root:rootpassword@interviewai_mongo:27017/interviewai?authSource=admin
+      - USER_SERVICE_URL=http://interviewai_user:8001
+      - JWT_SECRET=your-super-secret-key-change-in-production
+    depends_on:
+      - mysql
+      - mongodb
+    networks:
+      - interviewai-network
+
+networks:
+  interviewai-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mongo_data:

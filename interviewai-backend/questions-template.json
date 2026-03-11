@@ -1,0 +1,107 @@
+{
+  "questions": [
+    {
+      "mysql": {
+        "id": "react-custom-1",
+        "category_id": 1,
+        "title": "Build a Todo App",
+        "difficulty": "medium",
+        "tags": ["useState", "useEffect", "List Rendering"]
+      },
+      "mongodb": {
+        "question_id": "react-custom-1",
+        "title": "Build a Todo App",
+        "type": "coding",
+        "description": "Create a todo application with add, delete, and mark complete functionality",
+        "examples": [
+          {
+            "input": "User clicks 'Add' with input 'Learn React'",
+            "output": "New todo appears in list",
+            "explanation": "Component state updates and re-renders"
+          }
+        ],
+        "constraints": [
+          "Use React hooks only",
+          "No external state management"
+        ],
+        "starter_code": {
+          "javascript": "function TodoApp() {\n  // Your code here\n  return <div></div>;\n}",
+          "typescript": "const TodoApp: React.FC = () => {\n  // Your code here\n  return <div></div>;\n};"
+        },
+        "test_cases": [
+          {
+            "input": "Initial render",
+            "expected": "Empty list",
+            "hidden": false
+          },
+          {
+            "input": "Add 'Item 1', 'Item 2'",
+            "expected": "Both items visible",
+            "hidden": false
+          },
+          {
+            "input": "Delete first item",
+            "expected": "Only 'Item 2' visible",
+            "hidden": true
+          }
+        ],
+        "solution": "Use useState for todos array, map to render list items",
+        "solution_explanation": "Manage todos in state array, render with map(), handle add/delete with state updates"
+      }
+    },
+    {
+      "mysql": {
+        "id": "behavioral-custom-1",
+        "category_id": 6,
+        "title": "Tell me about a difficult project",
+        "difficulty": "medium",
+        "tags": ["Communication", "Problem Solving"]
+      },
+      "mongodb": {
+        "question_id": "behavioral-custom-1",
+        "title": "Tell me about a difficult project",
+        "type": "descriptive",
+        "description": "Describe a challenging project you worked on. Explain the problem, your approach, and the outcome.",
+        "examples": [
+          {
+            "input": "STAR method",
+            "output": "Situation → Task → Action → Result",
+            "explanation": "A structured way to tell behavioral stories"
+          }
+        ],
+        "solution": "Follow STAR method and show: problem-solving skills, teamwork, leadership",
+        "solution_explanation": "Good behavioral answers demonstrate growth, learning, and impact"
+      }
+    },
+    {
+      "mysql": {
+        "id": "system-design-custom-1",
+        "category_id": 3,
+        "title": "Design a Chat Application",
+        "difficulty": "hard",
+        "tags": ["Database Design", "Real-time", "Scalability"]
+      },
+      "mongodb": {
+        "question_id": "system-design-custom-1",
+        "title": "Design a Chat Application",
+        "type": "system-design",
+        "description": "Design a scalable chat application that supports real-time messaging for millions of users",
+        "constraints": [
+          "1M+ concurrent users",
+          "Message delivery guarantee",
+          "Typing indicators",
+          "Group chats support"
+        ],
+        "examples": [
+          {
+            "input": "User A sends message to User B",
+            "output": "Message delivered in <100ms",
+            "explanation": "Real-time communication requirement"
+          }
+        ],
+        "solution": "WebSocket for real-time, Redis for caching, database for persistence",
+        "solution_explanation": "Use WebSockets for bidirectional communication, Redis for message queue, PostgreSQL for permanent storage"
+      }
+    }
+  ]
+}

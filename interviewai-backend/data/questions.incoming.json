@@ -1,0 +1,1165 @@
+{
+  "questions": [
+    {
+      "mysql": {
+        "id": "dsa-011",
+        "category_id": 4,
+        "title": "Reverse Linked List",
+        "difficulty": "easy",
+        "tags": ["Linked List", "Recursion"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-011",
+        "title": "Reverse Linked List",
+        "type": "coding",
+        "description": "Given the head of a singly linked list, reverse the list, and return the reversed list.\n\nThe linked list is represented as an array for input/output purposes.",
+        "examples": [
+          { "input": "head = [1,2,3,4,5]", "output": "[5,4,3,2,1]", "explanation": "The list is reversed." },
+          { "input": "head = [1,2]", "output": "[2,1]", "explanation": "Two-node list reversed." }
+        ],
+        "constraints": [
+          "0 <= Number of nodes <= 5000",
+          "-5000 <= Node.val <= 5000"
+        ],
+        "starter_code": {
+          "javascript": "function reverseList(head) {\n  // head is an array representing the linked list\n  // return reversed array\n}",
+          "typescript": "function reverseList(head: number[]): number[] {\n  // your code here\n}",
+          "python": "def reverseList(head: list) -> list:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "head": [1,2,3,4,5] }, "expected": [5,4,3,2,1], "hidden": false },
+          { "input": { "head": [1,2] }, "expected": [2,1], "hidden": false },
+          { "input": { "head": [] }, "expected": [], "hidden": false },
+          { "input": { "head": [1] }, "expected": [1], "hidden": true },
+          { "input": { "head": [1,1,1,1] }, "expected": [1,1,1,1], "hidden": true },
+          { "input": { "head": [-5,-4,-3,-2,-1] }, "expected": [-1,-2,-3,-4,-5], "hidden": true },
+          { "input": { "head": [1,2,3] }, "expected": [3,2,1], "hidden": true }
+        ],
+        "hints": [
+          "Use three pointers: prev, curr, next to reverse links one by one.",
+          "At each step: save next, point curr.next to prev, advance prev and curr.",
+          "Alternatively, use recursion: reverse the rest of the list, then fix the head."
+        ],
+        "solution": "Iterative: prev=null, curr=head. Loop: save next, set curr.next=prev, prev=curr, curr=next. Return prev.",
+        "solution_explanation": "O(n) time, O(1) space iteratively. O(n) space recursively due to call stack."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-012",
+        "category_id": 4,
+        "title": "Merge Two Sorted Lists",
+        "difficulty": "easy",
+        "tags": ["Linked List", "Recursion", "Two Pointers"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-012",
+        "title": "Merge Two Sorted Lists",
+        "type": "coding",
+        "description": "You are given the heads of two sorted linked lists `list1` and `list2` (represented as arrays).\n\nMerge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.\n\nReturn the head of the merged linked list.",
+        "examples": [
+          { "input": "list1 = [1,2,4], list2 = [1,3,4]", "output": "[1,1,2,3,4,4]", "explanation": "Merged and sorted." },
+          { "input": "list1 = [], list2 = []", "output": "[]", "explanation": "Both empty." }
+        ],
+        "constraints": [
+          "0 <= Number of nodes in each list <= 50",
+          "-100 <= Node.val <= 100",
+          "Both lists are sorted in non-decreasing order"
+        ],
+        "starter_code": {
+          "javascript": "function mergeTwoLists(list1, list2) {\n  // lists are arrays\n  // return merged sorted array\n}",
+          "typescript": "function mergeTwoLists(list1: number[], list2: number[]): number[] {\n  // your code here\n}",
+          "python": "def mergeTwoLists(list1: list, list2: list) -> list:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "list1": [1,2,4], "list2": [1,3,4] }, "expected": [1,1,2,3,4,4], "hidden": false },
+          { "input": { "list1": [], "list2": [] }, "expected": [], "hidden": false },
+          { "input": { "list1": [], "list2": [0] }, "expected": [0], "hidden": false },
+          { "input": { "list1": [1], "list2": [2] }, "expected": [1,2], "hidden": true },
+          { "input": { "list1": [2], "list2": [1] }, "expected": [1,2], "hidden": true },
+          { "input": { "list1": [-10,-5,0], "list2": [-8,-3,2] }, "expected": [-10,-8,-5,-3,0,2], "hidden": true },
+          { "input": { "list1": [1,1,1], "list2": [1,1,1] }, "expected": [1,1,1,1,1,1], "hidden": true },
+          { "input": { "list1": [1,3,5,7,9], "list2": [2,4,6,8,10] }, "expected": [1,2,3,4,5,6,7,8,9,10], "hidden": true }
+        ],
+        "hints": [
+          "Use a dummy head node to simplify edge cases.",
+          "Compare heads of both lists and append the smaller one to result.",
+          "After one list is exhausted, append the remainder of the other."
+        ],
+        "solution": "Dummy node approach: compare list1[i] and list2[j], push smaller, advance that pointer. Append remainder.",
+        "solution_explanation": "O(n+m) time, O(1) extra space (in-place pointer manipulation). Dummy node removes null-check edge cases."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-013",
+        "category_id": 4,
+        "title": "Linked List Cycle",
+        "difficulty": "easy",
+        "tags": ["Linked List", "Two Pointers", "Floyd's Algorithm"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-013",
+        "title": "Linked List Cycle",
+        "type": "coding",
+        "description": "Given a linked list represented as an array and a `pos` value indicating where the tail connects back to (0-indexed), determine if the linked list has a cycle.\n\n`pos` is -1 if there is no cycle. Return `true` if there is a cycle, `false` otherwise.",
+        "examples": [
+          { "input": "head = [3,2,0,-4], pos = 1", "output": "true", "explanation": "Tail connects back to index 1, forming a cycle." },
+          { "input": "head = [1], pos = -1", "output": "false", "explanation": "No cycle." }
+        ],
+        "constraints": [
+          "0 <= Number of nodes <= 10^4",
+          "-10^5 <= Node.val <= 10^5",
+          "pos is -1 or a valid index in the linked list"
+        ],
+        "starter_code": {
+          "javascript": "function hasCycle(head, pos) {\n  // head is an array, pos is cycle start index (-1 = no cycle)\n  // return boolean\n}",
+          "typescript": "function hasCycle(head: number[], pos: number): boolean {\n  // your code here\n}",
+          "python": "def hasCycle(head: list, pos: int) -> bool:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "head": [3,2,0,-4], "pos": 1 }, "expected": true, "hidden": false },
+          { "input": { "head": [1,2], "pos": 0 }, "expected": true, "hidden": false },
+          { "input": { "head": [1], "pos": -1 }, "expected": false, "hidden": false },
+          { "input": { "head": [], "pos": -1 }, "expected": false, "hidden": true },
+          { "input": { "head": [1,2,3,4,5], "pos": -1 }, "expected": false, "hidden": true },
+          { "input": { "head": [1,2,3,4,5], "pos": 0 }, "expected": true, "hidden": true },
+          { "input": { "head": [1,2,3,4,5], "pos": 4 }, "expected": true, "hidden": true }
+        ],
+        "hints": [
+          "Floyd's Tortoise and Hare: use a slow pointer (1 step) and fast pointer (2 steps).",
+          "If there's a cycle, the fast pointer will eventually lap the slow pointer.",
+          "If the fast pointer reaches null, there's no cycle."
+        ],
+        "solution": "pos !== -1 means cycle exists. For O(1) space detection: slow/fast pointers. If they meet â†’ cycle.",
+        "solution_explanation": "O(n) time, O(1) space with Floyd's algorithm. Fast pointer moves 2x speed; if cycle exists, they must meet."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-014",
+        "category_id": 4,
+        "title": "Maximum Depth of Binary Tree",
+        "difficulty": "easy",
+        "tags": ["Tree", "DFS", "BFS", "Recursion"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-014",
+        "title": "Maximum Depth of Binary Tree",
+        "type": "coding",
+        "description": "Given the root of a binary tree (represented as a level-order array where `null` represents missing nodes), return its maximum depth.\n\nThe maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
+        "examples": [
+          { "input": "root = [3,9,20,null,null,15,7]", "output": "3", "explanation": "The tree has 3 levels." },
+          { "input": "root = [1,null,2]", "output": "2", "explanation": "Depth is 2." }
+        ],
+        "constraints": [
+          "0 <= Number of nodes <= 10^4",
+          "-100 <= Node.val <= 100"
+        ],
+        "starter_code": {
+          "javascript": "function maxDepth(root) {\n  // root is level-order array, null = missing node\n}",
+          "typescript": "function maxDepth(root: (number | null)[]): number {\n  // your code here\n}",
+          "python": "def maxDepth(root: list) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "root": [3,9,20,null,null,15,7] }, "expected": 3, "hidden": false },
+          { "input": { "root": [1,null,2] }, "expected": 2, "hidden": false },
+          { "input": { "root": [] }, "expected": 0, "hidden": false },
+          { "input": { "root": [1] }, "expected": 1, "hidden": true },
+          { "input": { "root": [1,2,3,4,5,6,7] }, "expected": 3, "hidden": true },
+          { "input": { "root": [1,2,null,3,null,null,null,4] }, "expected": 4, "hidden": true },
+          { "input": { "root": [1,null,2,null,null,null,3] }, "expected": 3, "hidden": true }
+        ],
+        "hints": [
+          "Recursively, depth = 1 + max(depth(left), depth(right)).",
+          "Base case: null node has depth 0.",
+          "BFS level-order traversal also works â€” count the number of levels."
+        ],
+        "solution": "Recursive DFS: return 0 for null, else 1 + max(maxDepth(left), maxDepth(right)).",
+        "solution_explanation": "O(n) time, O(h) space where h is tree height. Worst case O(n) for skewed tree."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-015",
+        "category_id": 4,
+        "title": "Validate Binary Search Tree",
+        "difficulty": "medium",
+        "tags": ["Tree", "DFS", "BST", "Recursion"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-015",
+        "title": "Validate Binary Search Tree",
+        "type": "coding",
+        "description": "Given the root of a binary tree (level-order array), determine if it is a valid binary search tree (BST).\n\nA valid BST is defined as follows:\n- The left subtree of a node contains only nodes with keys strictly less than the node's key.\n- The right subtree of a node contains only nodes with keys strictly greater than the node's key.\n- Both the left and right subtrees must also be binary search trees.",
+        "examples": [
+          { "input": "root = [2,1,3]", "output": "true", "explanation": "1 < 2 < 3, valid BST." },
+          { "input": "root = [5,1,4,null,null,3,6]", "output": "false", "explanation": "Node 4 is in right subtree but 3 < 5, invalid." }
+        ],
+        "constraints": [
+          "1 <= Number of nodes <= 10^4",
+          "-2^31 <= Node.val <= 2^31 - 1"
+        ],
+        "starter_code": {
+          "javascript": "function isValidBST(root) {\n  // root is level-order array\n}",
+          "typescript": "function isValidBST(root: (number | null)[]): boolean {\n  // your code here\n}",
+          "python": "def isValidBST(root: list) -> bool:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "root": [2,1,3] }, "expected": true, "hidden": false },
+          { "input": { "root": [5,1,4,null,null,3,6] }, "expected": false, "hidden": false },
+          { "input": { "root": [1] }, "expected": true, "hidden": false },
+          { "input": { "root": [5,4,6,null,null,3,7] }, "expected": false, "hidden": true },
+          { "input": { "root": [2,2,2] }, "expected": false, "hidden": true },
+          { "input": { "root": [10,5,15,null,null,6,20] }, "expected": false, "hidden": true },
+          { "input": { "root": [3,1,5,0,2,4,6] }, "expected": true, "hidden": true },
+          { "input": { "root": [2147483647] }, "expected": true, "hidden": true }
+        ],
+        "hints": [
+          "Don't just compare a node with its direct children â€” you need global min/max bounds.",
+          "Pass down (min, max) range to each recursive call.",
+          "Left child: max becomes current node value. Right child: min becomes current node value."
+        ],
+        "solution": "Recursive with bounds: isValid(node, min=-Inf, max=+Inf). Check min < node.val < max, recurse with updated bounds.",
+        "solution_explanation": "O(n) time, O(h) space. Passing bounds avoids the common mistake of only checking parent-child relationship."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-016",
+        "category_id": 4,
+        "title": "Level Order Traversal",
+        "difficulty": "medium",
+        "tags": ["Tree", "BFS", "Queue"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-016",
+        "title": "Binary Tree Level Order Traversal",
+        "type": "coding",
+        "description": "Given the root of a binary tree (level-order array), return the level order traversal of its nodes' values (i.e., from left to right, level by level) as an array of arrays.",
+        "examples": [
+          { "input": "root = [3,9,20,null,null,15,7]", "output": "[[3],[9,20],[15,7]]", "explanation": "Three levels of the tree." },
+          { "input": "root = [1]", "output": "[[1]]", "explanation": "Only root." }
+        ],
+        "constraints": [
+          "0 <= Number of nodes <= 2000",
+          "-1000 <= Node.val <= 1000"
+        ],
+        "starter_code": {
+          "javascript": "function levelOrder(root) {\n  // root is level-order array\n  // return array of arrays\n}",
+          "typescript": "function levelOrder(root: (number | null)[]): number[][] {\n  // your code here\n}",
+          "python": "def levelOrder(root: list) -> list[list[int]]:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "root": [3,9,20,null,null,15,7] }, "expected": [[3],[9,20],[15,7]], "hidden": false },
+          { "input": { "root": [1] }, "expected": [[1]], "hidden": false },
+          { "input": { "root": [] }, "expected": [], "hidden": false },
+          { "input": { "root": [1,2,3,4,5,6,7] }, "expected": [[1],[2,3],[4,5,6,7]], "hidden": true },
+          { "input": { "root": [1,null,2,null,null,null,3] }, "expected": [[1],[2],[3]], "hidden": true },
+          { "input": { "root": [1,2,null,3,null,null,null,4] }, "expected": [[1],[2],[3],[4]], "hidden": true }
+        ],
+        "hints": [
+          "Use a queue (BFS). Process one level at a time.",
+          "At the start of each level, record the current queue size â€” that's how many nodes are in this level.",
+          "Dequeue exactly that many nodes, push their children, collect values into a level array."
+        ],
+        "solution": "BFS with queue. Each iteration processes all nodes at current level (snapshot queue size). Push children for next level.",
+        "solution_explanation": "O(n) time, O(n) space. Queue holds at most one full level at a time, which is O(n) in worst case (complete tree last level)."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-017",
+        "category_id": 4,
+        "title": "Number of Islands",
+        "difficulty": "medium",
+        "tags": ["Matrix", "DFS", "BFS", "Union Find"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-017",
+        "title": "Number of Islands",
+        "type": "coding",
+        "description": "Given an `m x n` 2D binary grid where `'1'` represents land and `'0'` represents water, return the number of islands.\n\nAn island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.",
+        "examples": [
+          { "input": "grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]", "output": "1", "explanation": "All land is connected." },
+          { "input": "grid = [[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]", "output": "3", "explanation": "Three separate islands." }
+        ],
+        "constraints": [
+          "m == grid.length",
+          "n == grid[i].length",
+          "1 <= m, n <= 300",
+          "grid[i][j] is '0' or '1'"
+        ],
+        "starter_code": {
+          "javascript": "function numIslands(grid) {\n  // grid is 2D array of '0' and '1' strings\n}",
+          "typescript": "function numIslands(grid: string[][]): number {\n  // your code here\n}",
+          "python": "def numIslands(grid: list[list[str]]) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "grid": [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]] }, "expected": 1, "hidden": false },
+          { "input": { "grid": [["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]] }, "expected": 3, "hidden": false },
+          { "input": { "grid": [["1"]] }, "expected": 1, "hidden": false },
+          { "input": { "grid": [["0"]] }, "expected": 0, "hidden": true },
+          { "input": { "grid": [["1","0","1","0","1"]] }, "expected": 3, "hidden": true },
+          { "input": { "grid": [["1","1"],["1","1"]] }, "expected": 1, "hidden": true },
+          { "input": { "grid": [["1","0"],["0","1"]] }, "expected": 2, "hidden": true },
+          { "input": { "grid": [["0","0","0"],["0","0","0"],["0","0","0"]] }, "expected": 0, "hidden": true },
+          { "input": { "grid": [["1","0","0"],["0","1","0"],["0","0","1"]] }, "expected": 3, "hidden": true }
+        ],
+        "hints": [
+          "Iterate over every cell. When you find a '1', increment count and flood-fill the island.",
+          "DFS/BFS from that cell, marking all connected '1's as visited (set to '0').",
+          "This way each island is counted exactly once."
+        ],
+        "solution": "For each '1' found, run DFS marking all connected land as '0'. Increment counter per DFS call.",
+        "solution_explanation": "O(m*n) time and space. Each cell is visited at most once. Modifying in place avoids extra visited array."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-018",
+        "category_id": 4,
+        "title": "Course Schedule",
+        "difficulty": "medium",
+        "tags": ["Graph", "Topological Sort", "DFS", "Cycle Detection"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-018",
+        "title": "Course Schedule",
+        "type": "coding",
+        "description": "There are `numCourses` courses labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [a, b]` indicates that you must take course `b` first before taking course `a`.\n\nReturn `true` if you can finish all courses, `false` otherwise (i.e., detect if there's a cycle).",
+        "examples": [
+          { "input": "numCourses = 2, prerequisites = [[1,0]]", "output": "true", "explanation": "Take 0 then 1." },
+          { "input": "numCourses = 2, prerequisites = [[1,0],[0,1]]", "output": "false", "explanation": "Circular dependency." }
+        ],
+        "constraints": [
+          "1 <= numCourses <= 2000",
+          "0 <= prerequisites.length <= 5000",
+          "prerequisites[i].length == 2",
+          "All prerequisite pairs are unique"
+        ],
+        "starter_code": {
+          "javascript": "function canFinish(numCourses, prerequisites) {\n  // your code here\n}",
+          "typescript": "function canFinish(numCourses: number, prerequisites: number[][]): boolean {\n  // your code here\n}",
+          "python": "def canFinish(numCourses: int, prerequisites: list[list[int]]) -> bool:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "numCourses": 2, "prerequisites": [[1,0]] }, "expected": true, "hidden": false },
+          { "input": { "numCourses": 2, "prerequisites": [[1,0],[0,1]] }, "expected": false, "hidden": false },
+          { "input": { "numCourses": 1, "prerequisites": [] }, "expected": true, "hidden": false },
+          { "input": { "numCourses": 3, "prerequisites": [[1,0],[2,1]] }, "expected": true, "hidden": true },
+          { "input": { "numCourses": 3, "prerequisites": [[0,1],[1,2],[2,0]] }, "expected": false, "hidden": true },
+          { "input": { "numCourses": 4, "prerequisites": [[1,0],[2,0],[3,1],[3,2]] }, "expected": true, "hidden": true },
+          { "input": { "numCourses": 5, "prerequisites": [] }, "expected": true, "hidden": true },
+          { "input": { "numCourses": 2000, "prerequisites": [[1,0],[2,1],[3,2]] }, "expected": true, "hidden": true }
+        ],
+        "hints": [
+          "Model as a directed graph: edge bâ†’a means 'b before a'.",
+          "Use DFS with 3 states: unvisited(0), visiting(1), visited(2). A back edge (visitingâ†’visiting) means cycle.",
+          "Alternatively use Kahn's algorithm (BFS topological sort): if final count != numCourses, there's a cycle."
+        ],
+        "solution": "Build adjacency list. DFS with visited states. If we encounter a node currently in our DFS stack, cycle detected.",
+        "solution_explanation": "O(V+E) time and space. Cycle in directed graph = cannot finish all courses."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-019",
+        "category_id": 4,
+        "title": "Coin Change",
+        "difficulty": "medium",
+        "tags": ["Dynamic Programming", "BFS", "Array"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-019",
+        "title": "Coin Change",
+        "type": "coding",
+        "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.\n\nReturn the fewest number of coins needed to make up that amount. If that amount of money cannot be made up by any combination of the coins, return `-1`.\n\nYou may assume you have an infinite number of each coin.",
+        "examples": [
+          { "input": "coins = [1,2,5], amount = 11", "output": "3", "explanation": "5+5+1 = 11 using 3 coins." },
+          { "input": "coins = [2], amount = 3", "output": "-1", "explanation": "Cannot make 3 with only 2s." }
+        ],
+        "constraints": [
+          "1 <= coins.length <= 12",
+          "1 <= coins[i] <= 2^31 - 1",
+          "0 <= amount <= 10^4"
+        ],
+        "starter_code": {
+          "javascript": "function coinChange(coins, amount) {\n  // your code here\n}",
+          "typescript": "function coinChange(coins: number[], amount: number): number {\n  // your code here\n}",
+          "python": "def coinChange(coins: list[int], amount: int) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "coins": [1,2,5], "amount": 11 }, "expected": 3, "hidden": false },
+          { "input": { "coins": [2], "amount": 3 }, "expected": -1, "hidden": false },
+          { "input": { "coins": [1], "amount": 0 }, "expected": 0, "hidden": false },
+          { "input": { "coins": [1], "amount": 1 }, "expected": 1, "hidden": true },
+          { "input": { "coins": [1], "amount": 10000 }, "expected": 10000, "hidden": true },
+          { "input": { "coins": [2,5,10,1], "amount": 27 }, "expected": 4, "hidden": true },
+          { "input": { "coins": [186,419,83,408], "amount": 6249 }, "expected": 20, "hidden": true },
+          { "input": { "coins": [3,7,405,436], "amount": 8839 }, "expected": 25, "hidden": true },
+          { "input": { "coins": [2], "amount": 0 }, "expected": 0, "hidden": true }
+        ],
+        "hints": [
+          "Define dp[i] as the minimum coins needed to make amount i.",
+          "dp[0] = 0 (base case). For each amount, try all coins.",
+          "dp[i] = min(dp[i], dp[i - coin] + 1) for each coin <= i."
+        ],
+        "solution": "Bottom-up DP: dp array of size amount+1 initialized to Infinity. dp[0]=0. For each amount, iterate all coins.",
+        "solution_explanation": "O(amount * coins.length) time, O(amount) space. Classic unbounded knapsack variant."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-020",
+        "category_id": 4,
+        "title": "Product of Array Except Self",
+        "difficulty": "medium",
+        "tags": ["Array", "Prefix Sum"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-020",
+        "title": "Product of Array Except Self",
+        "type": "coding",
+        "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.\n\nThe product of any prefix or suffix of `nums` is guaranteed to fit in a 32-bit integer.\n\nYou must write an algorithm that runs in O(n) time and without using the division operation.",
+        "examples": [
+          { "input": "nums = [1,2,3,4]", "output": "[24,12,8,6]", "explanation": "Each element is product of all others." },
+          { "input": "nums = [-1,1,0,-3,3]", "output": "[0,0,9,0,0]", "explanation": "Zero in array affects products." }
+        ],
+        "constraints": [
+          "2 <= nums.length <= 10^5",
+          "-30 <= nums[i] <= 30",
+          "The product of any prefix or suffix fits in 32-bit integer"
+        ],
+        "starter_code": {
+          "javascript": "function productExceptSelf(nums) {\n  // your code here\n}",
+          "typescript": "function productExceptSelf(nums: number[]): number[] {\n  // your code here\n}",
+          "python": "def productExceptSelf(nums: list[int]) -> list[int]:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [1,2,3,4] }, "expected": [24,12,8,6], "hidden": false },
+          { "input": { "nums": [-1,1,0,-3,3] }, "expected": [0,0,9,0,0], "hidden": false },
+          { "input": { "nums": [2,3] }, "expected": [3,2], "hidden": false },
+          { "input": { "nums": [0,0] }, "expected": [0,0], "hidden": true },
+          { "input": { "nums": [1,0] }, "expected": [0,1], "hidden": true },
+          { "input": { "nums": [-1,-1,-1,-1] }, "expected": [-1,-1,-1,-1], "hidden": true },
+          { "input": { "nums": [1,1,1,1,1] }, "expected": [1,1,1,1,1], "hidden": true },
+          { "input": { "nums": [2,2,2,2,2] }, "expected": [16,16,16,16,16], "hidden": true },
+          { "input": { "nums": [-30,30,-30,30] }, "expected": [-27000,27000,-27000,27000], "hidden": true }
+        ],
+        "hints": [
+          "Compute prefix products: prefix[i] = product of all elements before index i.",
+          "Compute suffix products: suffix[i] = product of all elements after index i.",
+          "answer[i] = prefix[i] * suffix[i]. You can do this with O(1) extra space using a running variable."
+        ],
+        "solution": "Two passes: first build prefix products in result array, then multiply by suffix products using a running variable.",
+        "solution_explanation": "O(n) time, O(1) extra space (output array doesn't count). Elegant two-pass prefix/suffix multiplication."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-021",
+        "category_id": 4,
+        "title": "Min Stack",
+        "difficulty": "medium",
+        "tags": ["Stack", "Design"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-021",
+        "title": "Min Stack",
+        "type": "coding",
+        "description": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.\n\nImplement the `MinStack` class:\n- `MinStack()` initializes the stack object.\n- `push(val)` pushes val onto the stack.\n- `pop()` removes the element on the top.\n- `top()` gets the top element.\n- `getMin()` retrieves the minimum element in the stack.\n\nAll operations must be O(1).\n\nYour answer should be a function that takes an array of operations and returns results.",
+        "examples": [
+          { "input": "ops = [[\"push\",[-2]],[\"push\",[0]],[\"push\",[-3]],[\"getMin\",[]],[\"pop\",[]],[\"top\",[]],[\"getMin\",[]]]", "output": "[null,null,null,-3,null,0,-2]", "explanation": "Step by step MinStack operations." }
+        ],
+        "constraints": [
+          "-2^31 <= val <= 2^31 - 1",
+          "pop, top, getMin will always be called on non-empty stacks",
+          "At most 3 * 10^4 calls in total"
+        ],
+        "starter_code": {
+          "javascript": "function minStack(operations) {\n  // operations: array of [op, args]\n  // return array of results (null for void ops)\n  const results = [];\n  // implement here\n  return results;\n}",
+          "typescript": "function minStack(operations: [string, number[]][]): (number | null)[] {\n  // your code here\n}",
+          "python": "def minStack(operations: list) -> list:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "operations": [["push",[-2]],["push",[0]],["push",[-3]],["getMin",[]],["pop",[]],["top",[]],["getMin",[]]] }, "expected": [null,null,null,-3,null,0,-2], "hidden": false },
+          { "input": { "operations": [["push",[1]],["push",[2]],["top",[]],["getMin",[]]] }, "expected": [null,null,2,1], "hidden": false },
+          { "input": { "operations": [["push",[0]],["push",[1]],["push",[0]],["getMin",[]],["pop",[]],["getMin",[]]] }, "expected": [null,null,null,0,null,0], "hidden": true },
+          { "input": { "operations": [["push",[5]],["getMin",[]],["push",[3]],["getMin",[]],["push",[7]],["getMin",[]],["pop",[]],["getMin",[]]] }, "expected": [null,5,null,3,null,3,null,3], "hidden": true },
+          { "input": { "operations": [["push",[-1]],["getMin",[]],["push",[-2]],["getMin",[]],["pop",[]],["getMin",[]]] }, "expected": [null,-1,null,-2,null,-1], "hidden": true }
+        ],
+        "hints": [
+          "Use two stacks: one for actual values, one to track minimums.",
+          "When pushing, push to min stack if value <= current min.",
+          "When popping, if popped value equals min stack top, pop min stack too."
+        ],
+        "solution": "Maintain a secondary minStack. Push to minStack when val <= minStack.top(). Pop from both when they match.",
+        "solution_explanation": "O(1) all operations, O(n) space. The min stack always has the current minimum at its top."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-022",
+        "category_id": 4,
+        "title": "Search in Rotated Sorted Array",
+        "difficulty": "medium",
+        "tags": ["Array", "Binary Search"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-022",
+        "title": "Search in Rotated Sorted Array",
+        "type": "coding",
+        "description": "There is an integer array `nums` sorted in ascending order that has been rotated at some pivot index. Given the array `nums` and an integer `target`, return the index of `target` if it is in `nums`, or `-1` if it is not.\n\nYou must write an algorithm with O(log n) runtime complexity.",
+        "examples": [
+          { "input": "nums = [4,5,6,7,0,1,2], target = 0", "output": "4", "explanation": "0 is at index 4." },
+          { "input": "nums = [4,5,6,7,0,1,2], target = 3", "output": "-1", "explanation": "3 not in array." }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 5000",
+          "-10^4 <= nums[i] <= 10^4",
+          "All values are unique",
+          "nums is a rotated sorted array"
+        ],
+        "starter_code": {
+          "javascript": "function search(nums, target) {\n  // your code here\n}",
+          "typescript": "function search(nums: number[], target: number): number {\n  // your code here\n}",
+          "python": "def search(nums: list[int], target: int) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [4,5,6,7,0,1,2], "target": 0 }, "expected": 4, "hidden": false },
+          { "input": { "nums": [4,5,6,7,0,1,2], "target": 3 }, "expected": -1, "hidden": false },
+          { "input": { "nums": [1], "target": 0 }, "expected": -1, "hidden": false },
+          { "input": { "nums": [1], "target": 1 }, "expected": 0, "hidden": true },
+          { "input": { "nums": [3,1], "target": 1 }, "expected": 1, "hidden": true },
+          { "input": { "nums": [5,1,3], "target": 3 }, "expected": 2, "hidden": true },
+          { "input": { "nums": [1,2,3,4,5], "target": 3 }, "expected": 2, "hidden": true },
+          { "input": { "nums": [6,7,8,1,2,3,4,5], "target": 8 }, "expected": 2, "hidden": true },
+          { "input": { "nums": [6,7,8,1,2,3,4,5], "target": 6 }, "expected": 0, "hidden": true }
+        ],
+        "hints": [
+          "Standard binary search with an extra condition: determine which half is sorted.",
+          "If nums[mid] >= nums[left], the left half is sorted. Otherwise the right half is sorted.",
+          "Check if target falls within the sorted half; if so search there, else search the other half."
+        ],
+        "solution": "Binary search: determine sorted half, check if target is in it, redirect search accordingly.",
+        "solution_explanation": "O(log n) time, O(1) space. At each step one half is guaranteed sorted, allowing target range check."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-023",
+        "category_id": 4,
+        "title": "Longest Common Subsequence",
+        "difficulty": "medium",
+        "tags": ["String", "Dynamic Programming"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-023",
+        "title": "Longest Common Subsequence",
+        "type": "coding",
+        "description": "Given two strings `text1` and `text2`, return the length of their longest common subsequence. If there is no common subsequence, return `0`.\n\nA subsequence is a sequence derived by deleting some (or no) characters from a string without changing the relative order of the remaining characters.",
+        "examples": [
+          { "input": "text1 = \"abcde\", text2 = \"ace\"", "output": "3", "explanation": "LCS is 'ace' with length 3." },
+          { "input": "text1 = \"abc\", text2 = \"def\"", "output": "0", "explanation": "No common subsequence." }
+        ],
+        "constraints": [
+          "1 <= text1.length, text2.length <= 1000",
+          "text1 and text2 consist of only lowercase English characters"
+        ],
+        "starter_code": {
+          "javascript": "function longestCommonSubsequence(text1, text2) {\n  // your code here\n}",
+          "typescript": "function longestCommonSubsequence(text1: string, text2: string): number {\n  // your code here\n}",
+          "python": "def longestCommonSubsequence(text1: str, text2: str) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "text1": "abcde", "text2": "ace" }, "expected": 3, "hidden": false },
+          { "input": { "text1": "abc", "text2": "abc" }, "expected": 3, "hidden": false },
+          { "input": { "text1": "abc", "text2": "def" }, "expected": 0, "hidden": false },
+          { "input": { "text1": "a", "text2": "a" }, "expected": 1, "hidden": true },
+          { "input": { "text1": "a", "text2": "b" }, "expected": 0, "hidden": true },
+          { "input": { "text1": "bsbininm", "text2": "jmjkbkjkv" }, "expected": 1, "hidden": true },
+          { "input": { "text1": "oxcpqrsvwf", "text2": "shmtulqrypy" }, "expected": 2, "hidden": true },
+          { "input": { "text1": "abcdefghij", "text2": "jihgfedcba" }, "expected": 1, "hidden": true },
+          { "input": { "text1": "aaaaaaa", "text2": "aaaaaaa" }, "expected": 7, "hidden": true }
+        ],
+        "hints": [
+          "Build a 2D DP table where dp[i][j] = LCS of text1[0..i] and text2[0..j].",
+          "If text1[i] == text2[j]: dp[i][j] = dp[i-1][j-1] + 1.",
+          "Otherwise: dp[i][j] = max(dp[i-1][j], dp[i][j-1])."
+        ],
+        "solution": "2D DP table. Match characters diagonally, otherwise take max of left or above cell.",
+        "solution_explanation": "O(m*n) time and space. Classic DP problem â€” build up solutions for substrings to solve for full strings."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-024",
+        "category_id": 4,
+        "title": "Trapping Rain Water",
+        "difficulty": "hard",
+        "tags": ["Array", "Two Pointers", "Stack", "Dynamic Programming"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-024",
+        "title": "Trapping Rain Water",
+        "type": "coding",
+        "description": "Given `n` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+        "examples": [
+          { "input": "height = [0,1,0,2,1,0,1,3,2,1,2,1]", "output": "6", "explanation": "The elevation map traps 6 units of water." },
+          { "input": "height = [4,2,0,3,2,5]", "output": "9", "explanation": "9 units of water trapped." }
+        ],
+        "constraints": [
+          "n == height.length",
+          "1 <= n <= 2 * 10^4",
+          "0 <= height[i] <= 10^5"
+        ],
+        "starter_code": {
+          "javascript": "function trap(height) {\n  // your code here\n}",
+          "typescript": "function trap(height: number[]): number {\n  // your code here\n}",
+          "python": "def trap(height: list[int]) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "height": [0,1,0,2,1,0,1,3,2,1,2,1] }, "expected": 6, "hidden": false },
+          { "input": { "height": [4,2,0,3,2,5] }, "expected": 9, "hidden": false },
+          { "input": { "height": [1,0,1] }, "expected": 1, "hidden": false },
+          { "input": { "height": [3,0,0,2,0,4] }, "expected": 10, "hidden": true },
+          { "input": { "height": [0,0,0,0] }, "expected": 0, "hidden": true },
+          { "input": { "height": [5,4,3,2,1] }, "expected": 0, "hidden": true },
+          { "input": { "height": [1,2,3,4,5] }, "expected": 0, "hidden": true },
+          { "input": { "height": [2,0,2] }, "expected": 2, "hidden": true },
+          { "input": { "height": [100000,0,100000] }, "expected": 100000, "hidden": true },
+          { "input": { "height": [4,9,4,5,3,2,7,0,6] }, "expected": 18, "hidden": true }
+        ],
+        "hints": [
+          "Water at each index = min(maxLeft, maxRight) - height[i].",
+          "Precompute maxLeft and maxRight arrays in O(n) each.",
+          "Optimize to O(1) space with two pointers: advance the pointer with smaller max height."
+        ],
+        "solution": "Two pointers: left=0, right=n-1. Track maxLeft and maxRight. Advance pointer with smaller max, add trapped water.",
+        "solution_explanation": "O(n) time, O(1) space. Two-pointer is the optimal approach â€” the bottleneck is always the smaller side."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-025",
+        "category_id": 4,
+        "title": "Serialize and Deserialize Binary Tree",
+        "difficulty": "hard",
+        "tags": ["Tree", "DFS", "BFS", "Design", "String"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-025",
+        "title": "Serialize and Deserialize Binary Tree",
+        "type": "coding",
+        "description": "Design an algorithm to serialize and deserialize a binary tree.\n\nSerialization converts a tree to a string. Deserialization reconstructs the tree from that string.\n\nInput: a level-order array (null = missing). Output: must serialize and then deserialize back to the same structure.\n\nImplement a function that takes a tree (level-order array), serializes it, deserializes it, and returns the final level-order array.",
+        "examples": [
+          { "input": "root = [1,2,3,null,null,4,5]", "output": "[1,2,3,null,null,4,5]", "explanation": "Serialized then deserialized back to same tree." }
+        ],
+        "constraints": [
+          "0 <= Number of nodes <= 10^4",
+          "-1000 <= Node.val <= 1000"
+        ],
+        "starter_code": {
+          "javascript": "function serializeDeserialize(root) {\n  // root: level-order array\n  // serialize to string, deserialize back, return level-order array\n}",
+          "typescript": "function serializeDeserialize(root: (number|null)[]): (number|null)[] {\n  // your code here\n}",
+          "python": "def serializeDeserialize(root: list) -> list:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "root": [1,2,3,null,null,4,5] }, "expected": [1,2,3,null,null,4,5], "hidden": false },
+          { "input": { "root": [] }, "expected": [], "hidden": false },
+          { "input": { "root": [1] }, "expected": [1], "hidden": false },
+          { "input": { "root": [1,2] }, "expected": [1,2], "hidden": true },
+          { "input": { "root": [1,null,2,null,null,null,3] }, "expected": [1,null,2,null,null,null,3], "hidden": true },
+          { "input": { "root": [5,4,7,3,null,2,null,-1,null,null,null,null,null,9] }, "expected": [5,4,7,3,null,2,null,-1,null,null,null,null,null,9], "hidden": true }
+        ],
+        "hints": [
+          "Use preorder DFS: serialize as 'val,null,null,...'. Null nodes become a sentinel like 'N'.",
+          "For deserialization, use a queue or index pointer to consume tokens in the same order.",
+          "BFS serialization also works â€” process level by level, including nulls."
+        ],
+        "solution": "Preorder DFS serialize: 'val,N,N,...'. Deserialize: recursive build consuming tokens with a pointer/queue.",
+        "solution_explanation": "O(n) time and space. Preorder traversal naturally captures structure. Null markers allow exact reconstruction."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-026",
+        "category_id": 4,
+        "title": "Top K Frequent Elements",
+        "difficulty": "medium",
+        "tags": ["Array", "Hash Map", "Heap", "Bucket Sort"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-026",
+        "title": "Top K Frequent Elements",
+        "type": "coding",
+        "description": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.\n\nYour algorithm must be better than O(n log n) time complexity.",
+        "examples": [
+          { "input": "nums = [1,1,1,2,2,3], k = 2", "output": "[1,2]", "explanation": "1 appears 3 times, 2 appears 2 times." },
+          { "input": "nums = [1], k = 1", "output": "[1]", "explanation": "Only element." }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10^5",
+          "-10^4 <= nums[i] <= 10^4",
+          "k is in the range [1, number of unique elements]",
+          "Answer is guaranteed to be unique"
+        ],
+        "starter_code": {
+          "javascript": "function topKFrequent(nums, k) {\n  // your code here\n}",
+          "typescript": "function topKFrequent(nums: number[], k: number): number[] {\n  // your code here\n}",
+          "python": "def topKFrequent(nums: list[int], k: int) -> list[int]:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [1,1,1,2,2,3], "k": 2 }, "expected": [1,2], "hidden": false },
+          { "input": { "nums": [1], "k": 1 }, "expected": [1], "hidden": false },
+          { "input": { "nums": [1,2], "k": 2 }, "expected": [1,2], "hidden": false },
+          { "input": { "nums": [5,3,1,1,1,3,73,1], "k": 2 }, "expected": [1,3], "hidden": true },
+          { "input": { "nums": [4,1,-1,2,-1,2,3], "k": 2 }, "expected": [-1,2], "hidden": true },
+          { "input": { "nums": [1,1,1,2,2,3,3,3,3], "k": 1 }, "expected": [3], "hidden": true },
+          { "input": { "nums": [1,2,3,4,5,6,7,8,9,10], "k": 3 }, "expected": [1,2,3], "hidden": true }
+        ],
+        "hints": [
+          "Use a frequency map to count occurrences of each number.",
+          "Bucket sort: create an array of size n+1, index = frequency, store numbers there.",
+          "Collect from highest frequency buckets down until you have k elements."
+        ],
+        "solution": "Bucket sort approach: count frequencies, bucket by frequency, iterate buckets from top.",
+        "solution_explanation": "O(n) time with bucket sort, O(n) space. Better than heap approach O(n log k). Bucket index = frequency, max = n."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-027",
+        "category_id": 4,
+        "title": "Rotate Image",
+        "difficulty": "medium",
+        "tags": ["Array", "Matrix", "Math"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-027",
+        "title": "Rotate Image",
+        "type": "coding",
+        "description": "You are given an `n x n` 2D matrix representing an image. Rotate the image by 90 degrees clockwise **in-place**.\n\nYou must rotate the image in-place, which means you have to modify the input 2D matrix directly.",
+        "examples": [
+          { "input": "matrix = [[1,2,3],[4,5,6],[7,8,9]]", "output": "[[7,4,1],[8,5,2],[9,6,3]]", "explanation": "Rotated 90 degrees clockwise." },
+          { "input": "matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]", "output": "[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]", "explanation": "4x4 matrix rotated." }
+        ],
+        "constraints": [
+          "n == matrix.length == matrix[i].length",
+          "1 <= n <= 20",
+          "-1000 <= matrix[i][j] <= 1000"
+        ],
+        "starter_code": {
+          "javascript": "function rotate(matrix) {\n  // modify matrix in-place, return it\n}",
+          "typescript": "function rotate(matrix: number[][]): number[][] {\n  // your code here\n}",
+          "python": "def rotate(matrix: list[list[int]]) -> list[list[int]]:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "matrix": [[1,2,3],[4,5,6],[7,8,9]] }, "expected": [[7,4,1],[8,5,2],[9,6,3]], "hidden": false },
+          { "input": { "matrix": [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]] }, "expected": [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]], "hidden": false },
+          { "input": { "matrix": [[1]] }, "expected": [[1]], "hidden": false },
+          { "input": { "matrix": [[1,2],[3,4]] }, "expected": [[3,1],[4,2]], "hidden": true },
+          { "input": { "matrix": [[-1,-2],[-3,-4]] }, "expected": [[-3,-1],[-4,-2]], "hidden": true },
+          { "input": { "matrix": [[0,0,0],[0,1,0],[0,0,0]] }, "expected": [[0,0,0],[0,1,0],[0,0,0]], "hidden": true },
+          { "input": { "matrix": [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]] }, "expected": [[21,16,11,6,1],[22,17,12,7,2],[23,18,13,8,3],[24,19,14,9,4],[25,20,15,10,5]], "hidden": true }
+        ],
+        "hints": [
+          "90Â° clockwise rotation = transpose + reverse each row.",
+          "Transpose: swap matrix[i][j] with matrix[j][i] for all i < j.",
+          "Then reverse each row in place."
+        ],
+        "solution": "Step 1: Transpose matrix (swap [i][j] with [j][i]). Step 2: Reverse each row.",
+        "solution_explanation": "O(nÂ²) time, O(1) space. Transpose + row-reverse is the cleanest in-place rotation trick."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-028",
+        "category_id": 4,
+        "title": "Kth Largest Element in an Array",
+        "difficulty": "medium",
+        "tags": ["Array", "Heap", "QuickSelect", "Sorting"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-028",
+        "title": "Kth Largest Element in an Array",
+        "type": "coding",
+        "description": "Given an integer array `nums` and an integer `k`, return the `k`th largest element in the array.\n\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\n\nYou must solve it without fully sorting the array (aim for O(n) average).",
+        "examples": [
+          { "input": "nums = [3,2,1,5,6,4], k = 2", "output": "5", "explanation": "2nd largest is 5." },
+          { "input": "nums = [3,2,3,1,2,4,5,5,6], k = 4", "output": "4", "explanation": "4th largest is 4." }
+        ],
+        "constraints": [
+          "1 <= k <= nums.length <= 10^5",
+          "-10^4 <= nums[i] <= 10^4"
+        ],
+        "starter_code": {
+          "javascript": "function findKthLargest(nums, k) {\n  // your code here\n}",
+          "typescript": "function findKthLargest(nums: number[], k: number): number {\n  // your code here\n}",
+          "python": "def findKthLargest(nums: list[int], k: int) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [3,2,1,5,6,4], "k": 2 }, "expected": 5, "hidden": false },
+          { "input": { "nums": [3,2,3,1,2,4,5,5,6], "k": 4 }, "expected": 4, "hidden": false },
+          { "input": { "nums": [1], "k": 1 }, "expected": 1, "hidden": false },
+          { "input": { "nums": [2,1], "k": 1 }, "expected": 2, "hidden": true },
+          { "input": { "nums": [2,1], "k": 2 }, "expected": 1, "hidden": true },
+          { "input": { "nums": [-1,-2,-3,-4,-5], "k": 2 }, "expected": -2, "hidden": true },
+          { "input": { "nums": [10000,-10000,0], "k": 2 }, "expected": 0, "hidden": true },
+          { "input": { "nums": [1,1,1,1,1], "k": 3 }, "expected": 1, "hidden": true }
+        ],
+        "hints": [
+          "A min-heap of size k gives you the kth largest efficiently.",
+          "QuickSelect (partition-based) gives O(n) average time.",
+          "After partitioning, if pivot index == n-k you found it; otherwise recurse on one side."
+        ],
+        "solution": "Min-heap of size k: push all elements, pop when size > k. Heap top is kth largest. Or use QuickSelect.",
+        "solution_explanation": "Heap: O(n log k) time. QuickSelect: O(n) average, O(nÂ²) worst. Heap is preferred for reliability."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-029",
+        "category_id": 4,
+        "title": "Longest Increasing Subsequence",
+        "difficulty": "medium",
+        "tags": ["Array", "Dynamic Programming", "Binary Search"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-029",
+        "title": "Longest Increasing Subsequence",
+        "type": "coding",
+        "description": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.\n\nA subsequence is a sequence derived from the array by deleting some elements without changing the relative order of remaining elements.",
+        "examples": [
+          { "input": "nums = [10,9,2,5,3,7,101,18]", "output": "4", "explanation": "[2,3,7,101] is LIS of length 4." },
+          { "input": "nums = [0,1,0,3,2,3]", "output": "4", "explanation": "[0,1,2,3] is LIS of length 4." }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 2500",
+          "-10^4 <= nums[i] <= 10^4"
+        ],
+        "starter_code": {
+          "javascript": "function lengthOfLIS(nums) {\n  // your code here\n}",
+          "typescript": "function lengthOfLIS(nums: number[]): number {\n  // your code here\n}",
+          "python": "def lengthOfLIS(nums: list[int]) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [10,9,2,5,3,7,101,18] }, "expected": 4, "hidden": false },
+          { "input": { "nums": [0,1,0,3,2,3] }, "expected": 4, "hidden": false },
+          { "input": { "nums": [7,7,7,7,7,7,7] }, "expected": 1, "hidden": false },
+          { "input": { "nums": [1,3,6,7,9,4,10,5,6] }, "expected": 6, "hidden": true },
+          { "input": { "nums": [1,2,3,4,5] }, "expected": 5, "hidden": true },
+          { "input": { "nums": [5,4,3,2,1] }, "expected": 1, "hidden": true },
+          { "input": { "nums": [1] }, "expected": 1, "hidden": true },
+          { "input": { "nums": [3,5,6,2,5,4,19,5,6,7,12] }, "expected": 6, "hidden": true },
+          { "input": { "nums": [-10000,10000,-10000,10000] }, "expected": 2, "hidden": true }
+        ],
+        "hints": [
+          "DP approach: dp[i] = LIS ending at index i. dp[i] = max(dp[j]+1) for all j < i where nums[j] < nums[i].",
+          "O(n log n) with patience sorting: maintain a 'tails' array. Binary search to find where to place each element.",
+          "The length of 'tails' array at the end is the LIS length."
+        ],
+        "solution": "Patience sort: maintain tails array. For each num, binary search for first tail >= num, replace it. If none, append.",
+        "solution_explanation": "O(n log n) time, O(n) space. tails[i] is the smallest tail element of all increasing subsequences of length i+1."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-030",
+        "category_id": 4,
+        "title": "Word Break",
+        "difficulty": "medium",
+        "tags": ["String", "Dynamic Programming", "Trie", "Hash Set"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-030",
+        "title": "Word Break",
+        "type": "coding",
+        "description": "Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.\n\nNote that the same word in the dictionary may be reused multiple times in the segmentation.",
+        "examples": [
+          { "input": "s = \"leetcode\", wordDict = [\"leet\",\"code\"]", "output": "true", "explanation": "\"leet\" + \"code\" = \"leetcode\"." },
+          { "input": "s = \"applepenapple\", wordDict = [\"apple\",\"pen\"]", "output": "true", "explanation": "\"apple\" + \"pen\" + \"apple\"." }
+        ],
+        "constraints": [
+          "1 <= s.length <= 300",
+          "1 <= wordDict.length <= 1000",
+          "1 <= wordDict[i].length <= 20",
+          "s and wordDict consist only of lowercase English letters",
+          "All strings in wordDict are unique"
+        ],
+        "starter_code": {
+          "javascript": "function wordBreak(s, wordDict) {\n  // your code here\n}",
+          "typescript": "function wordBreak(s: string, wordDict: string[]): boolean {\n  // your code here\n}",
+          "python": "def wordBreak(s: str, wordDict: list[str]) -> bool:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "s": "leetcode", "wordDict": ["leet","code"] }, "expected": true, "hidden": false },
+          { "input": { "s": "applepenapple", "wordDict": ["apple","pen"] }, "expected": true, "hidden": false },
+          { "input": { "s": "catsandog", "wordDict": ["cats","dog","sand","and","cat"] }, "expected": false, "hidden": false },
+          { "input": { "s": "a", "wordDict": ["a"] }, "expected": true, "hidden": true },
+          { "input": { "s": "ab", "wordDict": ["a","b"] }, "expected": true, "hidden": true },
+          { "input": { "s": "aaaaaaa", "wordDict": ["aaaa","aaa"] }, "expected": true, "hidden": true },
+          { "input": { "s": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab", "wordDict": ["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"] }, "expected": false, "hidden": true },
+          { "input": { "s": "goalspecialized", "wordDict": ["go","goal","goals","special","specialized"] }, "expected": false, "hidden": true }
+        ],
+        "hints": [
+          "dp[i] = true if s[0..i] can be segmented using wordDict.",
+          "For each position i, check all j < i: if dp[j] is true and s[j..i] is in dict, then dp[i] = true.",
+          "Use a Set for O(1) dictionary lookup."
+        ],
+        "solution": "DP: dp[0]=true. For each i, check all j < i: if dp[j] && wordDict has s[j..i], set dp[i]=true.",
+        "solution_explanation": "O(nÂ² * m) time where m is avg word length for substring check, O(n) space. Set lookup makes word check O(m)."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-031",
+        "category_id": 4,
+        "title": "Find Median from Data Stream",
+        "difficulty": "hard",
+        "tags": ["Heap", "Design", "Two Heaps", "Sorting"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-031",
+        "title": "Find Median from Data Stream",
+        "type": "coding",
+        "description": "Implement the MedianFinder class:\n- `addNum(num)` adds a number from the data stream to the data structure.\n- `findMedian()` returns the median of all elements so far.\n\nIf the number of elements is even, the median is the mean of the two middle values.\n\nInput: array of operations `[['addNum',[1]], ['addNum',[2]], ['findMedian',[]]]`. Return results array (null for addNum).",
+        "examples": [
+          { "input": "ops = [[\"addNum\",[1]],[\"addNum\",[2]],[\"findMedian\",[]],[\"addNum\",[3]],[\"findMedian\",[]]]", "output": "[null,null,1.5,null,2.0]", "explanation": "Median after 1,2 is 1.5; after 1,2,3 is 2.0." }
+        ],
+        "constraints": [
+          "-10^5 <= num <= 10^5",
+          "findMedian will be called at least once",
+          "At most 5 * 10^4 calls total"
+        ],
+        "starter_code": {
+          "javascript": "function medianFinder(operations) {\n  // operations: array of ['addNum',[val]] or ['findMedian',[]]\n  // return results array\n}",
+          "typescript": "function medianFinder(operations: [string, number[]][]): (number | null)[] {\n  // your code here\n}",
+          "python": "def medianFinder(operations: list) -> list:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "operations": [["addNum",[1]], ["addNum",[2]], ["findMedian",[]], ["addNum",[3]], ["findMedian",[]]] }, "expected": [null,null,1.5,null,2.0], "hidden": false },
+          { "input": { "operations": [["addNum",[6]], ["findMedian",[]], ["addNum",[10]], ["findMedian",[]], ["addNum",[2]], ["findMedian",[]], ["addNum",[6]], ["findMedian",[]], ["addNum",[5]], ["findMedian",[]], ["addNum",[0]], ["findMedian",[]], ["addNum",[6]], ["findMedian",[]], ["addNum",[3]], ["findMedian",[]]] }, "expected": [null,6.0,null,8.0,null,6.0,null,6.0,null,6.0,null,5.5,null,6.0,null,5.5], "hidden": true },
+          { "input": { "operations": [["addNum",[-1]], ["findMedian",[]], ["addNum",[-2]], ["findMedian",[]], ["addNum",[-3]], ["findMedian",[]]] }, "expected": [null,-1.0,null,-1.5,null,-2.0], "hidden": true },
+          { "input": { "operations": [["addNum",[5]], ["findMedian",[]]] }, "expected": [null,5.0], "hidden": true }
+        ],
+        "hints": [
+          "Use two heaps: a max-heap for the lower half and a min-heap for the upper half.",
+          "Always balance so that sizes differ by at most 1. Max-heap may have one extra.",
+          "Median = maxHeap.top() if odd size, else average of both tops."
+        ],
+        "solution": "Two heaps (max-heap lo, min-heap hi). Balance after each insert. findMedian peeks tops.",
+        "solution_explanation": "O(log n) addNum, O(1) findMedian, O(n) space. Two-heap design is optimal for streaming median."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-032",
+        "category_id": 4,
+        "title": "Permutations",
+        "difficulty": "medium",
+        "tags": ["Array", "Backtracking", "Recursion"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-032",
+        "title": "Permutations",
+        "type": "coding",
+        "description": "Given an array `nums` of distinct integers, return all the possible permutations. You can return the answer in any order.",
+        "examples": [
+          { "input": "nums = [1,2,3]", "output": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]", "explanation": "All 3! = 6 permutations." },
+          { "input": "nums = [0,1]", "output": "[[0,1],[1,0]]", "explanation": "2 permutations." }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 6",
+          "-10 <= nums[i] <= 10",
+          "All integers in nums are unique"
+        ],
+        "starter_code": {
+          "javascript": "function permute(nums) {\n  // your code here\n}",
+          "typescript": "function permute(nums: number[]): number[][] {\n  // your code here\n}",
+          "python": "def permute(nums: list[int]) -> list[list[int]]:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [1,2,3] }, "expected": [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]], "hidden": false },
+          { "input": { "nums": [0,1] }, "expected": [[0,1],[1,0]], "hidden": false },
+          { "input": { "nums": [1] }, "expected": [[1]], "hidden": false },
+          { "input": { "nums": [-1,1] }, "expected": [[-1,1],[1,-1]], "hidden": true },
+          { "input": { "nums": [1,2,3,4] }, "expected": 24, "hidden": true },
+          { "input": { "nums": [1,2,3,4,5,6] }, "expected": 720, "hidden": true }
+        ],
+        "hints": [
+          "Use backtracking: at each step, pick an unused element and recurse.",
+          "Use a boolean visited array or swap elements to track which are used.",
+          "Base case: when current permutation length equals nums.length, add to result."
+        ],
+        "solution": "Backtracking: swap nums[i] with nums[start], recurse for start+1, swap back (restore).",
+        "solution_explanation": "O(n! * n) time and space. n! permutations each of length n. Swap-based avoids extra visited array."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-033",
+        "category_id": 4,
+        "title": "Jump Game",
+        "difficulty": "medium",
+        "tags": ["Array", "Greedy", "Dynamic Programming"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-033",
+        "title": "Jump Game",
+        "type": "coding",
+        "description": "You are given an integer array `nums`. You are initially positioned at the first index, and each element represents your maximum jump length from that position.\n\nReturn `true` if you can reach the last index, or `false` otherwise.",
+        "examples": [
+          { "input": "nums = [2,3,1,1,4]", "output": "true", "explanation": "Jump 1 from index 0, then 3 from index 1 to last." },
+          { "input": "nums = [3,2,1,0,4]", "output": "false", "explanation": "Always get stuck at index 3." }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10^4",
+          "0 <= nums[i] <= 10^5"
+        ],
+        "starter_code": {
+          "javascript": "function canJump(nums) {\n  // your code here\n}",
+          "typescript": "function canJump(nums: number[]): boolean {\n  // your code here\n}",
+          "python": "def canJump(nums: list[int]) -> bool:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [2,3,1,1,4] }, "expected": true, "hidden": false },
+          { "input": { "nums": [3,2,1,0,4] }, "expected": false, "hidden": false },
+          { "input": { "nums": [0] }, "expected": true, "hidden": false },
+          { "input": { "nums": [1,0] }, "expected": true, "hidden": true },
+          { "input": { "nums": [2,0,0] }, "expected": true, "hidden": true },
+          { "input": { "nums": [1,1,1,1,1] }, "expected": true, "hidden": true },
+          { "input": { "nums": [1,0,1,0] }, "expected": false, "hidden": true },
+          { "input": { "nums": [0,1] }, "expected": false, "hidden": true },
+          { "input": { "nums": [5,0,0,0,0,0] }, "expected": true, "hidden": true }
+        ],
+        "hints": [
+          "Track the furthest index you can reach so far.",
+          "If at any point your current index exceeds maxReach, you're stuck.",
+          "Update maxReach = max(maxReach, i + nums[i]) at each step."
+        ],
+        "solution": "Greedy: track maxReach. For each i <= maxReach, update maxReach = max(maxReach, i+nums[i]). Return maxReach >= n-1.",
+        "solution_explanation": "O(n) time, O(1) space. Greedy works because we always want to extend reach as far as possible."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-034",
+        "category_id": 4,
+        "title": "Subsets",
+        "difficulty": "medium",
+        "tags": ["Array", "Backtracking", "Bit Manipulation"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-034",
+        "title": "Subsets",
+        "type": "coding",
+        "description": "Given an integer array `nums` of unique elements, return all possible subsets (the power set).\n\nThe solution set must not contain duplicate subsets. Return the solution in any order.",
+        "examples": [
+          { "input": "nums = [1,2,3]", "output": "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]", "explanation": "All 2^3 = 8 subsets." },
+          { "input": "nums = [0]", "output": "[[],[0]]", "explanation": "Two subsets." }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10",
+          "-10 <= nums[i] <= 10",
+          "All numbers in nums are unique"
+        ],
+        "starter_code": {
+          "javascript": "function subsets(nums) {\n  // your code here\n}",
+          "typescript": "function subsets(nums: number[]): number[][] {\n  // your code here\n}",
+          "python": "def subsets(nums: list[int]) -> list[list[int]]:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "nums": [1,2,3] }, "expected": [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]], "hidden": false },
+          { "input": { "nums": [0] }, "expected": [[],[0]], "hidden": false },
+          { "input": { "nums": [1,2] }, "expected": [[],[1],[2],[1,2]], "hidden": false },
+          { "input": { "nums": [1] }, "expected": [[],[1]], "hidden": true },
+          { "input": { "nums": [1,2,3,4] }, "expected": 16, "hidden": true },
+          { "input": { "nums": [-1,0,1] }, "expected": 8, "hidden": true },
+          { "input": { "nums": [1,2,3,4,5,6,7,8,9,10] }, "expected": 1024, "hidden": true }
+        ],
+        "hints": [
+          "Backtracking: at each index, decide to include or exclude the element.",
+          "Add the current subset to result at every recursive call (not just leaf nodes).",
+          "Bit manipulation: for n elements, iterate 0 to 2^n-1, each bit determines inclusion."
+        ],
+        "solution": "Backtracking: start with empty subset, at each step add current and recurse including/excluding next elements.",
+        "solution_explanation": "O(2^n * n) time, O(2^n * n) space. 2^n subsets, each up to length n to copy."
+      }
+    },
+    {
+      "mysql": {
+        "id": "dsa-035",
+        "category_id": 4,
+        "title": "Decode Ways",
+        "difficulty": "medium",
+        "tags": ["String", "Dynamic Programming"],
+        "is_active": 1
+      },
+      "mongodb": {
+        "question_id": "dsa-035",
+        "title": "Decode Ways",
+        "type": "coding",
+        "description": "A message containing letters from A-Z can be encoded as numbers: 'A'â†’1, 'B'â†’2, ..., 'Z'â†’26.\n\nGiven a string `s` containing only digits, return the number of ways to decode it.\n\nThe test cases are generated so that the answer fits in a 32-bit integer.",
+        "examples": [
+          { "input": "s = \"12\"", "output": "2", "explanation": "Decoded as 'AB' (1,2) or 'L' (12)." },
+          { "input": "s = \"226\"", "output": "3", "explanation": "'BZ' (2,26), 'VF' (22,6), 'BBF' (2,2,6)." }
+        ],
+        "constraints": [
+          "1 <= s.length <= 100",
+          "s contains only digits",
+          "s may contain leading zeros"
+        ],
+        "starter_code": {
+          "javascript": "function numDecodings(s) {\n  // your code here\n}",
+          "typescript": "function numDecodings(s: string): number {\n  // your code here\n}",
+          "python": "def numDecodings(s: str) -> int:\n    pass"
+        },
+        "test_cases": [
+          { "input": { "s": "12" }, "expected": 2, "hidden": false },
+          { "input": { "s": "226" }, "expected": 3, "hidden": false },
+          { "input": { "s": "06" }, "expected": 0, "hidden": false },
+          { "input": { "s": "0" }, "expected": 0, "hidden": true },
+          { "input": { "s": "10" }, "expected": 1, "hidden": true },
+          { "input": { "s": "27" }, "expected": 1, "hidden": true },
+          { "input": { "s": "11106" }, "expected": 2, "hidden": true },
+          { "input": { "s": "111111111111111111111111111111111111111111111" }, "expected": 1134903170, "hidden": true },
+          { "input": { "s": "2611055971756562" }, "expected": 4, "hidden": true }
+        ],
+        "hints": [
+          "dp[i] = number of ways to decode s[0..i-1].",
+          "Single digit: dp[i] += dp[i-1] if s[i-1] != '0'.",
+          "Two digits: dp[i] += dp[i-2] if s[i-2..i-1] is between 10 and 26."
+        ],
+        "solution": "DP: dp[0]=1, dp[1]= s[0]!='0' ? 1:0. For each i, add dp[i-1] if valid single, dp[i-2] if valid double.",
+        "solution_explanation": "O(n) time, O(1) space (only need last two values). Handle leading zeros carefully."
+      }
+    }
+  ]
+}
+
